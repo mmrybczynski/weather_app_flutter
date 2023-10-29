@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Pages/WatherPage.dart'
+import 'Pages/WatherPage.dart';
 
 void main() {
   runApp(const MyApp());
