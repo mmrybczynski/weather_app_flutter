@@ -23,7 +23,6 @@ class WeatherService {
   }
 
   Future<String> getCurrentCity() async {
-
     //Permision for use location
     LocationPermission permission = await Geolocator.checkPermission();
 
@@ -33,11 +32,11 @@ class WeatherService {
 
     //fetch current location
     Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high;
-    );
+        desiredAccuracy: LocationAccuracy.high);
 
     //convert location to list of placemarks
-    List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
 
     //extract the city name from firs placemark
     String? city = placemarks[0].locality;
