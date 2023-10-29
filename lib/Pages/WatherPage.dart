@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/Service/WeatherService.dart';
+import 'package:weather_app/Models/WatherModel.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -8,8 +10,46 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
+  //api key
+  final _WeatherService = WeatherService("Your api key");
+  Weather? _weather;
+
+  //fetch weather
+  _fetchWeather() async {
+    //get current city
+    String cityName = await _WeatherService.getCurrentCity();
+
+    //get weather for city
+    try {
+      final weather = await _WeatherService.getWeather(cityName);
+      setState(() {
+        _weather = weather;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  //weather animations
+
+  //init state
+  @override
+  void initState() {
+    super.initState();
+
+    //fetch weather on startup
+    _fetchWeather();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        children: [
+          Text(_weather?.cityName ?? "Loading city..."),
+          Text('${_weather?.temperature}st C')
+        ],
+      ),
+    );
   }
 }
