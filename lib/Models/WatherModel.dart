@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 class Weather {
   final String cityName;
-  final Double temperature;
+  final double temperature;
   final String mainCondition;
 
   Weather(
