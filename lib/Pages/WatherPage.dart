@@ -55,6 +55,8 @@ class _WeatherPageState extends State<WeatherPage> {
         return 'assets/thunder.json';
       case 'clear':
         return 'assets/sunny.json';
+      case 'snow':
+        return 'assets/snow.json';
       default:
         return 'assets/wait.json';
     }
@@ -72,16 +74,28 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(_weather?.cityName ?? "Loading city...",
-              style: TextStyle(fontSize: 25)),
-          Lottie.asset(getAnimationForWeather(_weather?.mainCondition)),
-          Text(
-            '${_weather?.temperature.round() ?? "-"} °C',
-            style: TextStyle(fontSize: 20),
-          ),
-        ]),
+      body: SafeArea(
+        child: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image(
+              image: AssetImage("assets/location2.png"),
+              width: 50,
+              height: 50,
+            ),
+            Text(_weather?.cityName ?? "Loading city...",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                )),
+            Spacer(),
+            Lottie.asset(getAnimationForWeather(_weather?.mainCondition)),
+            Spacer(),
+            Text(
+              '${_weather?.temperature.round() ?? ""}°C',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ]),
+        ),
       ),
     );
   }
